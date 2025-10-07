@@ -37,6 +37,8 @@ def locators_demo():
 
         time.sleep(2)
 
+        login_error_msg=driver.find_element(By.CSS_SELECTOR,"h3[data-test='error']")
+        print(login_error_msg.text)
         print("Using TAG_NAME locator for links...")
 
         links = driver.find_elements(By.TAG_NAME, "a")
