@@ -1,9 +1,11 @@
+# ScreenshotDemo: Demonstrates taking screenshots on login failure using Selenium
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 import time
 import os
 
 class ScreenshotDemo:
+    # Initialize Chrome WebDriver and screenshot directory
     def __init__(self, username, password):
         print("Initializing Chrome WebDriver...")
         self.driver = webdriver.Chrome()
@@ -12,25 +14,26 @@ class ScreenshotDemo:
         self.username = username
         self.password = password
 
+    # Ensure screenshot directory exists
     def ensure_screenshot_dir(self):
         if not os.path.exists(self.screenshot_dir):
             os.makedirs(self.screenshot_dir)
             print(f"Created directory: {self.screenshot_dir}")
 
+    # Take screenshot and save with unique filename
     def take_screenshot(self, filename):
         base, ext = os.path.splitext(filename)
         path = os.path.join(self.screenshot_dir, filename)
         counter = 2
-
         # Keep incrementing the counter until a unique filename is found
         while os.path.exists(path):
             new_filename = f"{base}-{counter}{ext}"
             path = os.path.join(self.screenshot_dir, new_filename)
             counter += 1
-
         self.driver.save_screenshot(path)
         print(f"Screenshot saved: {path}")
 
+    # Attempt login and take screenshot on failure
     def login(self):
         print(f"Attempting login with username='{self.username}' and password='{self.password}'")
         self.driver.find_element(By.ID, "username").send_keys(self.username)
@@ -45,6 +48,7 @@ class ScreenshotDemo:
             print("Login failed")
             return False
 
+    # Main runner for the demo
     def run(self):
         try:
             self.driver.get("https://practice.expandtesting.com/login")

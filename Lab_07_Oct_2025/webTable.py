@@ -1,25 +1,30 @@
+# WebTableDemo: Demonstrates extracting and searching data from a web table using Selenium
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 import time
 
 class WebTableDemo:
+    # Initialize Chrome WebDriver in headless mode
     def __init__(self):
         print("Initializing Chrome WebDriver in headless mode...")
         chrome_options = Options()
         chrome_options.add_argument('--headless')
         self.driver = webdriver.Chrome(options=chrome_options)
 
+    # Navigate to the specified URL
     def navigate(self, url):
         print(f"Navigating to {url} ...")
         self.driver.get(url)
 
+    # Locate all table rows on the page
     def get_table_rows(self):
         print("Locating all table rows...")
         rows = self.driver.find_elements(By.CSS_SELECTOR, "tr")
         print(f"Found {len(rows)} rows.")
         return rows
 
+    # Calculate the number of columns in the table
     def get_column_count(self, rows):
         print("Calculating number of columns...")
         total_cells = len(self.driver.find_elements(By.CSS_SELECTOR, "td"))
@@ -27,6 +32,7 @@ class WebTableDemo:
         print(f"Detected {columns} columns.")
         return columns
 
+    # Print data from the first 'limit' rows of the table
     def print_table_data(self, rows, columns, limit=10):
         print(f"Extracting data from the first {limit} rows...")
         for i, row in enumerate(rows[:limit]):
@@ -35,6 +41,7 @@ class WebTableDemo:
             if any(row_data):
                 print(f"Row {i + 1}: {row_data}")
 
+    # Search for a specific country in the table and print its row data
     def search_country(self, rows, columns, country="India"):
         print(f"Searching for '{country}' in the table...")
         for i, row in enumerate(rows):
@@ -46,6 +53,7 @@ class WebTableDemo:
                 return
         print(f"{country} not found in the table.")
 
+    # Main runner for the demo
     def run(self):
         try:
             self.navigate("https://cosmocode.io/automation-practice-webtable/")

@@ -1,17 +1,21 @@
+# ScrollDemo: Demonstrates various scrolling actions using Selenium
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 import time
 
 class ScrollDemo:
+    # Initialize Chrome WebDriver
     def __init__(self):
         print("Initializing Chrome WebDriver...")
         self.driver = webdriver.Chrome()
 
+    # Navigate to the specified URL
     def navigate(self, url):
         print(f"Navigating to {url} ...")
         self.driver.get(url)
 
+    # Scroll down and up by specified pixel values
     def scroll_by_pixel(self, down=1000, up=500):
         print(f"Scrolling down by {down} pixels")
         self.driver.execute_script(f"window.scrollBy(0, {down});")
@@ -20,22 +24,26 @@ class ScrollDemo:
         self.driver.execute_script(f"window.scrollBy(0, -{up});")
         time.sleep(2)
 
+    # Scroll to the bottom of the page
     def scroll_to_bottom(self):
         print("Scrolling to bottom")
         self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
         time.sleep(2)
 
+    # Scroll to the top of the page
     def scroll_to_top(self):
         print("Scrolling to top")
         self.driver.execute_script("window.scrollTo(0, 0);")
         time.sleep(2)
 
+    # Scroll to a specific element by class name
     def scroll_to_element(self, class_name="widget-content"):
         print(f"Scrolling to element with class name '{class_name}'")
         element = self.driver.find_element(By.CLASS_NAME, class_name)
         self.driver.execute_script("arguments[0].scrollIntoView();", element)
         time.sleep(2)
 
+    # Scroll using keyboard keys
     def scroll_with_keys(self):
         print("Scrolling using PAGE_DOWN key")
         self.driver.find_element(By.TAG_NAME, "body").send_keys(Keys.PAGE_DOWN)
@@ -44,6 +52,7 @@ class ScrollDemo:
         self.driver.find_element(By.TAG_NAME, "body").send_keys(Keys.PAGE_UP)
         time.sleep(1)
 
+    # Main runner for the demo
     def run(self):
         try:
             self.navigate("https://testautomationpractice.blogspot.com/")

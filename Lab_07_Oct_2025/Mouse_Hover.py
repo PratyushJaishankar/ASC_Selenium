@@ -1,17 +1,21 @@
+# MouseHoverDemo: Demonstrates mouse hover action and color change detection using Selenium
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
 import time
 
 class MouseHoverDemo:
+    # Initialize Chrome WebDriver
     def __init__(self):
         print("Initializing Chrome WebDriver...")
         self.driver = webdriver.Chrome()
 
+    # Navigate to the specified URL
     def navigate(self, url):
         print(f"Navigating to {url} ...")
         self.driver.get(url)
 
+    # Hover over the element and check color change
     def hover_and_check_color(self, selector):
         print(f"Locating element with selector '{selector}' for mouse hover...")
         element = self.driver.find_element(By.CSS_SELECTOR, selector)
@@ -31,6 +35,7 @@ class MouseHoverDemo:
             print("Mouse hover failed, color did not change.")
         time.sleep(2)
 
+    # Main runner for the demo
     def run(self):
         try:
             self.navigate("https://practice.expandtesting.com/")
