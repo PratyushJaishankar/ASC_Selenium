@@ -1,3 +1,9 @@
+import time
+
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+
+
 def multiple_windows_demo():
     driver = webdriver.Chrome()
 
@@ -13,9 +19,9 @@ def multiple_windows_demo():
 
         time.sleep(1)
 
-        driver.find_element(By.ID, "messageWindowButton").click()
-
-        time.sleep(1)
+        # driver.find_element(By.ID, "messageWindowButton").click()
+        #
+        # time.sleep(1)
 
         # Get all windows
 
